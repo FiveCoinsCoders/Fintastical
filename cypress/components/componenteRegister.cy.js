@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-// eslint-disable no-unused-vars
 
+import { createTestingPinia } from '@pinia/testing';
+import { mount } from 'cypress/vue';
+import RegisterForm from '../../src/components/auth/RegisterForm.vue';
 
-
-describe('componenteProfile.cy.js', () => {
+describe('componenteRegister', () => {
   beforeEach(() => {
     // Simulate that the user is authenticated, depending on how you handle authentication in your store (auth store).
     // Here we will use a mock for authentication.

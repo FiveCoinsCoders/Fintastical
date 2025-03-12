@@ -1,17 +1,9 @@
 /* eslint-disable no-undef */
-// eslint-disable-next-line no-unused-vars
-Cypress.on('uncaught:exception', (err, runnable) => {
-  if (err.message.includes('VUE_DEVTOOLS_KIT_ACTIVE_APP_RECORD')) {
-    return false; // Evita que Cypress falle el test
-  }
-  return true; // Si es otro tipo de error, lo dejamos para que Cypress lo maneje
-});
 
 import { createTestingPinia } from '@pinia/testing';
 import { mount } from 'cypress/vue';
-
 import componenteLogin from '../../src/components/auth/LoginForm.vue';
-import { useAuthStore } from '../../src/stores/auth'; // Verifica la ruta del store
+
 
 describe('componenteLogin', () => {
   beforeEach(() => {

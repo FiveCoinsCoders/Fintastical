@@ -1,50 +1,31 @@
 <template>
   <div class="profile-view" v-if="isAuthenticated">
-    <div class="profile-data">
-      <p>Hello {{ user.name }}!</p>
-      <ul>
-        <li>{{ user.email }}</li>
-        <li>User ID: {{ user.id }}</li>
-      </ul>
-      <router-link to="/investments" class="investments-link">
-      My investments
-    </router-link>
-    </div>
+    <div class="profile-container">
+      <div class="profile-data">
+        <p>Hello {{ user.name }}!</p>
+        <ul>
+  <li data-testid="user-email">{{ user.email }}</li>
+  <li data-testid="user-id">User ID: {{ user.id }}</li>
+</ul>
 
-    <h2>Profile Update</h2>
-    <form class="update-form" @submit.prevent="handleUpdateProfile">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        v-model="name"
-        placeholder="Nombre"
-        class="input-field"
-      >
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        v-model="email"
-        placeholder="Email"
-        class="input-field"
-      >
-      <label for="password">Password</label>
-      <div class="password-field">
-        <input
-          :type="showPassword ? 'text' : 'password'"
-          v-model="password"
-          id="password"
-          placeholder="Contraseña"
-          class="input-field"
-        >
-        <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'" @click="togglePasswordVisibility"></i>
+        <router-link to="/investments" class="investments-link">My investments</router-link>
       </div>
-      <button type="submit" class="update-btn">Save Changes</button>
-      <p v-if="error" class="error">{{ error }}</p>
-    </form>
+      <h2>Profile Update</h2>
+      <form v-if="isAuthenticated" class="update-form" @submit.prevent="handleUpdateProfile">
 
-
+        <label for="name">Name</label>
+        <input type="text" id="name" v-model="name" placeholder="Nombre" class="input-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" v-model="email" placeholder="Email" class="input-field">
+        <label for="password">Password</label>
+        <div class="password-field">
+          <input :type="showPassword ? 'text' : 'password'" v-model="password" id="password" placeholder="Contraseña" class="input-field">
+          <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'" @click="togglePasswordVisibility"></i>
+        </div>
+        <button type="submit" class="update-btn">Save Changes</button>
+        <p v-if="error" class="error">{{ error }}</p>
+      </form>
+    </div>
   </div>
 
   <div v-else>
