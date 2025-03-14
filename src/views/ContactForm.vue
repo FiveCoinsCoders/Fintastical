@@ -288,7 +288,7 @@ button.submit-btn:hover {
   margin-left: 100rem;
   width: 70%; 
   border-radius: 12px; 
-  background-color: #f7f7f7;
+  background-color: #f0f0f0;
   padding: 15px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
   position: relative;
@@ -297,6 +297,7 @@ button.submit-btn:hover {
   justify-content: center;
   align-items: center;
 }
+
 
 
 /* Estilos para el pop-up */
