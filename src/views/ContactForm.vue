@@ -107,50 +107,56 @@ const showPopup = ref(false); // Controls visibility of the popup
 
 // handleSubmit function
 const handleSubmit = async () => {
-  console.log('Form Submitted:', form.value);
-  formSubmitted.value = true;
-  showPopup.value = true; // Show the popup
+  console.log('Form Submitted:', form.value); // Log form submission for debugging
+  formSubmitted.value = true; // Mark form as submitted
+  showPopup.value = true; // Show the popup confirmation
 
   // Prepare the form data for submission
-  const data = { ...form.value };
+  const data = { ...form.value }; // Copy form data into a new object
 
   try {
+    // Send form data to the local server via a POST request
     const response = await fetch("http://localhost:3000/contactos", {
-      method: "POST",
+      method: "POST", // Use POST method to send data
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json", // Set content type to JSON
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data), // Convert form data to JSON string
     });
 
+    // Wait for the server response and parse it as JSON
     const result = await response.json();
-    console.log("Respuesta del servidor:", result);
+    console.log("Respuesta del servidor:", result); // Log server response
 
     if (response.ok) {
-
-      form.value = { name: '', email: '', subject: '', message: '' }; // Reset form fields
+      // If the response is successful, reset the form fields
+      form.value = { name: '', email: '', subject: '', message: '' };
     } else {
-      alert("Error al enviar el mensaje");
+      alert("Error al enviar el mensaje"); // Show an error message if request fails
     }
   } catch (error) {
+    // Handle any network errors
     console.error("Error de conexión:", error);
-    alert("Error de conexión con el servidor");
+    alert("Error de conexión con el servidor"); // Show connection error alert
   }
 };
 
 // handleFileUpload function
 const handleFileUpload = (event) => {
-  const file = event.target.files[0];
+  const file = event.target.files[0]; // Get the first selected file
+
+  // Check if a file is selected and if it's a text file
   if (file && file.type === 'text/plain') {
-    const reader = new FileReader();
+    const reader = new FileReader(); // Create a FileReader instance
     reader.onload = () => {
-      fileContent.value = reader.result; // Store file content
+      fileContent.value = reader.result; // Store the file content in fileContent variable
     };
-    reader.readAsText(file); // Read the file as text
+    reader.readAsText(file); // Read the file as plain text
   } else {
-    alert('Only text files are allowed.'); // Show an alert if the file is not text
+    alert('Only text files are allowed.'); // Show an alert if the file is not a text file
   }
 };
+
 
 
 // closePopup function
